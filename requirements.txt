@@ -3,3 +3,5 @@ aiohttp
 azure-identity
 openai
 streamlit
+pytest
+pytest-asyncio

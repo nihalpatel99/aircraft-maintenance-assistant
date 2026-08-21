@@ -1,0 +1,24 @@
+FROM python:3.11-slim AS base
+ 
+WORKDIR /app
+ 
+# System deps kept minimal; add build-essential etc. here if a package needs it
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+ 
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+ 
+COPY . .
+ 
+# ---- Test stage: used by the "Run tests in Docker" CI step ----
+FROM base AS test
+COPY requirements-test.txt .
+RUN pip install --no-cache-dir -r requirements-test.txt
+CMD ["pytest", "test_aircraft_assistant.py", "-v"]
+ 
+# ---- Runtime stage: what ships / runs the actual chatbot ----
+FROM base AS runtime
+ENV PYTHONUNBUFFERED=1
+CMD ["python", "aircraft_assistant.py"]

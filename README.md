@@ -1,5 +1,7 @@
 # Aircraft Maintenance Assistant
 
+Demo Recording :- https://drive.google.com/file/d/1p7Wj6mflaV-eqtyMKyMuOVrWUAgx3EY7/view?usp=sharing
+
 An AI-powered assistant that helps diagnose aircraft maintenance issues. It answers questions about diagnosis, risk level, urgency of repair, flight cancellation risk, and estimated repair duration, using Azure OpenAI's Responses API.
 
 The project includes two interfaces:
